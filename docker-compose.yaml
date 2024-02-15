@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: bitnami/postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRESQL_USERNAME=raulrory
+      - POSTGRESQL_PASSWORD=postgres
+      - POSTGRESQL_DATABASE=diets
+    volumes:
+      - polls_pg_data:/bitnami/postgresql
+
+
+volumes:
+  polls_pg_data:
+      
+  
