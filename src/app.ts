@@ -1,4 +1,5 @@
 import fastify from "fastify";
+import cookie from "@fastify/cookie";
 import { usersRoute } from "./routes/usersRoute.js";
 
 const configPrettyPrint =  {
@@ -17,6 +18,11 @@ const configPrettyPrint =  {
 
 const app = fastify({
     logger: configPrettyPrint["develpment"]
+});
+
+app.register(cookie, {
+    secret: "my-secret",
+    hook: "onRequest",
 });
 
 app.register(usersRoute, { prefix: "/users" });

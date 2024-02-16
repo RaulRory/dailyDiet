@@ -23,7 +23,14 @@ export class UsersController {
             const user = userSchema.parse(request.body);
 
             await usersUseCase.createUser(user);
-        
+
+            reply.cookie("userId", user.id, {
+                path: "/",
+                maxAge: 60 * 60 * 24 * 7,
+                httpOnly: true,
+                signed: true,
+            });
+
             return reply.status(201).send();
         } catch (error) {
             console.error(error);
