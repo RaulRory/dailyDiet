@@ -1,4 +1,5 @@
 import fastify from "fastify";
+import { usersRoute } from "./routes/usersRoute.js";
 
 const configPrettyPrint =  {
     develpment: {
@@ -7,7 +8,7 @@ const configPrettyPrint =  {
             option: {
                 translateTime: true,
                 colorize: true,
-                ignore: 'pid,hostname,reqId,responseTime,req,res',
+                ignore: 'pid, hostname, reqId, responseTime, req, res',
             },
         },
     },
@@ -18,6 +19,7 @@ const app = fastify({
     logger: configPrettyPrint["develpment"]
 });
 
+app.register(usersRoute, { prefix: "/users" });
 
 
 export { app };
