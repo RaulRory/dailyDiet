@@ -8,6 +8,12 @@ export class UsersUseCase {
     }
 
     async createUser(user: User) {
+        const emailExists = await this.usersRepository.emailExists(user.email);
+        
+        if (emailExists) {
+            throw new Error('Email already exists!');
+        }
+
         await this.usersRepository.createUser(user);
         
     }

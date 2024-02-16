@@ -12,5 +12,17 @@ export class UserDatabaseRepository implements UsersRepository {
                 email: user.email,
             },
         });
+
+        return;
+    }
+
+    async emailExists(email: string) {
+        const user = await this.model.users.findUnique({
+            where: {
+                email: email,
+            },
+        });
+
+        return user !== null;
     }
 }
