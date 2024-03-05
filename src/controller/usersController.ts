@@ -38,4 +38,36 @@ export class UsersController {
         }
 
     }
+
+    async userMetrics(request: FastifyRequest, reply: FastifyReply) {
+        try {
+
+            const { userId } = request.cookies
+            const prismaService = new PrismaService();
+            const repository = new UserDatabaseRepository(prismaService);
+            const usersUseCase = new UsersUseCase(repository);
+            
+            const schemasUserParameters = z.object({
+                id: z.string().uuid()
+            });
+
+            const { id } = schemasUserParameters.parse(request.params);
+
+            if (userId) {
+                const userIdExists = await usersUseCase.usersExists(id);
+
+                if (userIdExists) {
+                    const metricsUsers = await usersUseCase.userMetrics(id);
+                    return reply.status(200).send(metricsUsers);
+                }
+            }
+
+            return reply.status(401).send({ message: "User not authorized" });
+            
+
+        } catch (error) {
+            console.error(error);
+            return reply.status(400).send({ error: "there was a failure in the process"});       
+        }
+    }
 }

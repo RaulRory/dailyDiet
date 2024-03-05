@@ -1,5 +1,6 @@
 import { UserDatabaseRepository } from "../database/userDatabaseRepository.js";
-import { User } from "../repository/userRepository.js";
+import { User, UserMetrics } from "../repository/userRepository.js";
+import { findDateWithMostDiet } from "../utils/findDateWithDiet.js";
 
 export class UsersUseCase {
 
@@ -15,6 +16,34 @@ export class UsersUseCase {
         }
 
         await this.usersRepository.createUser(user);
+    }
+
+    async usersExists(id: string) {
+        const userIdExists = await this.usersRepository.userIdExists(id);
+
+        if (userIdExists) {
+            throw new Error('User id not exists!');
+        }
+
+        return userIdExists
+    }
+
+    async userMetrics(id: string) {
+        const meals = await this.usersRepository.userMetrics(id);
+
+        if (!meals) {
+            throw new Error('User not found!');
+        }
+
         
+        const userMetrics: UserMetrics = 
+             {
+                mealsRegistered: meals.length,
+                mealsOnDiet: meals.filter((meal) => meal.isOnTheDiet).length,
+                mealsOffDiet: meals.filter((meal) => !meal.isOnTheDiet).length,
+                bestSequenceOfMealsOnDiet: findDateWithMostDiet(meals)
+            }
+        
+        return userMetrics;
     }
 }

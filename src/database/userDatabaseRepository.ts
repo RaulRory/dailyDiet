@@ -25,4 +25,24 @@ export class UserDatabaseRepository implements UsersRepository {
 
         return user !== null;
     }
+
+    async userIdExists(id: string) {
+        const user = await this.model.users.findUnique({
+            where: {
+                id: id,
+            },
+        });
+
+        return user !== null;
+    }
+
+    async userMetrics(id: string) {
+        const meals = await this.model.meals.findMany({
+            where: {
+                id: id,
+            },
+        });
+
+        return meals;
+    }
 }
