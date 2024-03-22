@@ -3,8 +3,8 @@
 ## Usuarios
     - [x] Deve ser possível criar um usuário
     - [x] Deve ser possível identificar o usuário entre as requisições
-    - [ ] Deve ser possível recuperar as métricas de um usuário
-    - [ ] Deve ser possível registrar uma refeição feita   
+    - [x] Deve ser possível recuperar as métricas de um usuário
+    - [ ] Deve ser possível registrar uma refeição feita
 
 ## Refeições
     - [ ] Deve ser possível editar uma refeição, todos os dados
@@ -14,5 +14,5 @@
 
 
 # Regras de Négocio
-    - [ ] Toda refeição é relacionada ao usúario
+    - [x] Toda refeição é relacionada ao usúario
     - [ ] O usuário só pode visualizar, editar e apagar as refeições o qual ele criou
