@@ -5,7 +5,7 @@ const parseSchemaMeal = z.object({
     description: z.string(),
     date: z.date(),
     isOnTheDiet: z.boolean(),
-    userId: z.string().uuid(),
+    usersId: z.string().uuid(),
 });
 
 export type Meals = z.infer<typeof parseSchemaMeal>;
