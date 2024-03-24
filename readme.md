@@ -4,9 +4,9 @@
     - [x] Deve ser possível criar um usuário
     - [x] Deve ser possível identificar o usuário entre as requisições
     - [x] Deve ser possível recuperar as métricas de um usuário
-    - [ ] Deve ser possível registrar uma refeição feita
 
 ## Refeições
+    - [x] Deve ser possível registrar uma refeição feita
     - [ ] Deve ser possível editar uma refeição, todos os dados
     - [ ] Deve ser possível apagar uma refeição
     - [ ] Deve ser possível listar todas as refeições de um usuário

@@ -1,6 +1,7 @@
 import fastify from "fastify";
 import cookie from "@fastify/cookie";
 import { usersRoute } from "./routes/usersRoute.js";
+import { mealsRoutes } from "./routes/mealsRoute.js"
 
 const configPrettyPrint =  {
     develpment: {
@@ -26,6 +27,7 @@ app.register(cookie, {
 });
 
 app.register(usersRoute, { prefix: "/users" });
+app.register(mealsRoutes, { prefix: "/meals"})
 
 
 export { app };
