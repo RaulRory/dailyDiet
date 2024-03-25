@@ -39,7 +39,7 @@ export class UserDatabaseRepository implements UsersRepository {
     async userMetrics(id: string) {
         const meals = await this.model.meals.findMany({
             where: {
-                id: id,
+                usersId: id,
             },
         });
 

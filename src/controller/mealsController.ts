@@ -16,29 +16,34 @@ export class MealsController {
             const mealSchema = z.object({
                 name: z.string(),
                 description: z.string(),
-                date: z.date(),
+                date: z.coerce.date(),
                 isOnTheDiet: z.boolean(),
             });
     
             const mealSchemaParse = mealSchema.parse(request.body);
     
             const { userId } = request.cookies;
+            
     
             if (userId) {
+
+                const [id] = userId.split(".");
+
                 const meal = {
                     ...mealSchemaParse,
-                    usersId: userId
+                    usersId: id
                 }
     
                const mealCreated = await useCase.createMeals(meal);
     
-               reply.status(201).send(mealCreated);
+               return reply.status(201).send(mealCreated);
             }
 
             return reply.status(401).send({ message: "User not Autorizithe"});
 
         } catch (error) {
-            return reply.status(400).send({ error });
+            console.error(error);
+            return reply.status(400).send({ error: "there was a failure in the process"});
         }
     }
 
@@ -51,7 +56,7 @@ export class MealsController {
             const mealSchema = z.object({
                 name: z.string(),
                 description: z.string(),
-                date: z.date(),
+                date: z.coerce.date(),
                 isOnTheDiet: z.boolean(),
             });
 
@@ -60,22 +65,25 @@ export class MealsController {
             });
     
             const mealSchemaParse = mealSchema.parse(request.body);
-            const { id } = idMealsSchema.parse(request.query);
+            const { id } = idMealsSchema.parse(request.params);
     
             const { userId } = request.cookies;
     
             if (userId) {
+                const [usersId] = userId.split(".");
+
                 const meal = {
                     ...mealSchemaParse,
-                    usersId: userId
+                    usersId
                 }
     
                const mealsEdited = await useCase.editMeals(meal, id);
     
-               reply.status(201).send(mealsEdited);
+               return reply.status(201).send(mealsEdited);
             }
 
         } catch (error) {
+            console.error(error);
             return reply.status(400).send({ error: "there was a failure in the process"});
         }
     }
@@ -90,18 +98,19 @@ export class MealsController {
                 id: z.string().uuid()
             });
     
-            const { id } = idMealsSchema.parse(request.query);
+            const { id } = idMealsSchema.parse(request.params);
     
             const { userId } = request.cookies;
     
             if (userId) {
                await useCase.deleteMeals(id);
     
-               reply.status(204).send({ message: "Meal deleted"});
+               return reply.status(204).send({ message: "Meal deleted"});
             }
 
         } catch (error) {
-            return reply.status(400).send({ error });
+            console.error(error);
+            return reply.status(400).send({ error: "there was a failure in the process"});
         }
     }
 
@@ -114,13 +123,15 @@ export class MealsController {
             const { userId } = request.cookies;
     
             if (userId) {
-               const meals = await useCase.listMeals(userId);
+                const [usersId] = userId.split(".");
+               const meals = await useCase.listMeals(usersId);
     
-               reply.status(200).send(meals);
+               return reply.status(200).send(meals);
             }
 
         } catch (error) {
-            return reply.status(400).send({ error });
+            console.error(error);
+            return reply.status(400).send({ error: "there was a failure in the process"});
         }
     }
 
@@ -134,18 +145,19 @@ export class MealsController {
                 id: z.string().uuid()
             });
     
-            const { id } = idMealsSchema.parse(request.query);
+            const { id } = idMealsSchema.parse(request.params);
     
             const { userId } = request.cookies;
     
             if (userId) {
                const meal = await useCase.listMealById(id);
     
-               reply.status(200).send(meal);
+               return reply.status(200).send(meal);
             }
 
         } catch (error) {
-            return reply.status(400).send({ error });
+            console.error(error);
+            return reply.status(400).send({ error: "there was a failure in the process"});
         }
     }
 }

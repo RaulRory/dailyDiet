@@ -21,7 +21,7 @@ export class UsersUseCase {
     async usersExists(id: string) {
         const userIdExists = await this.usersRepository.userIdExists(id);
 
-        if (userIdExists) {
+        if (!userIdExists) {
             throw new Error('User id not exists!');
         }
 
@@ -35,7 +35,7 @@ export class UsersUseCase {
             throw new Error('User not found!');
         }
 
-        
+        console.log(meals);
         const userMetrics: UserMetrics = 
              {
                 mealsRegistered: meals.length,

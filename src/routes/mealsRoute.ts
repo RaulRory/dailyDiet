@@ -8,5 +8,5 @@ export async function mealsRoutes (fastify: FastifyInstance) {
     fastify.put("/edit/:id", mealsController.editMeals)
     fastify.delete("/delete/:id", mealsController.deleteMeals)
     fastify.get("/list", mealsController.listMeals)
-    
+    fastify.get("/list/:id", mealsController.listMealById)
 }

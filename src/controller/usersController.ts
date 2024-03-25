@@ -34,7 +34,7 @@ export class UsersController {
             return reply.status(201).send();
         } catch (error) {
             console.error(error);
-            return reply.status(400).send({ error });
+            return reply.status(400).send({ error: "there was a failure in the process"});
         }
 
     }
@@ -67,7 +67,7 @@ export class UsersController {
 
         } catch (error) {
             console.error(error);
-            return reply.status(400).send({ error });      
+            return reply.status(400).send({ error: "there was a failure in the process"});       
         }
     }
 }
