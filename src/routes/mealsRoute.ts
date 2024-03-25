@@ -5,4 +5,5 @@ export async function mealsRoutes (fastify: FastifyInstance) {
     const mealsController = new MealsController()
     
     fastify.post("/create", mealsController.createMeals)
+    fastify.put("/edit/:id", mealsController.editMeals)
 }

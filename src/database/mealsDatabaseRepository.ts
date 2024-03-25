@@ -23,4 +23,16 @@ export class MealsDatabaseRepository implements MealsRepository {
         return meal;
     }
 
+    async updateMeals(dataToUpdate: Meals, id: string): Promise<Meals> {
+        const meal = await this.model.meals.update({
+            data: {
+                ...dataToUpdate
+            },
+            where: {
+                id: id
+            }
+        });
+
+        return meal;
+    }
 }

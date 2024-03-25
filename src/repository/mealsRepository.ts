@@ -12,4 +12,5 @@ export type Meals = z.infer<typeof parseSchemaMeal>;
 
 export interface MealsRepository {
     createMeals(data: Meals): Promise<Meals>
+    updateMeals(dataToUpdate: Meals, id: string): Promise<Meals>
 }
