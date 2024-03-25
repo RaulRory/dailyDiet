@@ -23,4 +23,20 @@ export class MealsUseCase {
 
         return;
     }
+
+    async listMeals(id: string) {
+        const meals = await this.mealsRepository.listMeals(id);
+
+        return meals;
+    }
+
+    async listMealById(id: string) {
+        const meal = await this.mealsRepository.listMealById(id);
+
+        if (!meal) {
+            throw new Error("Meal not found");
+        }
+        
+        return meal;
+    }
 }

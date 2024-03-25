@@ -55,4 +55,14 @@ export class MealsDatabaseRepository implements MealsRepository {
 
         return meals;
     }
+
+    async listMealById(id: string): Promise<Meals | null> {
+        const meal = await this.model.meals.findUnique({
+            where: {
+                id: id
+            }
+        });
+
+        return meal;
+    }
 }

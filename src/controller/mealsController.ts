@@ -38,7 +38,7 @@ export class MealsController {
             return reply.status(401).send({ message: "User not Autorizithe"});
 
         } catch (error) {
-            return reply.status(400).send({ error: "there was a failure in the process"});
+            return reply.status(400).send({ error });
         }
     }
 
@@ -101,7 +101,51 @@ export class MealsController {
             }
 
         } catch (error) {
-            return reply.status(400).send({ error: "there was a failure in the process"});
+            return reply.status(400).send({ error });
+        }
+    }
+
+    async listMeals(request: FastifyRequest, reply: FastifyReply) {
+        try {
+            const model = new PrismaService()
+            const repository = new MealsDatabaseRepository(model);
+            const useCase = new MealsUseCase(repository);
+    
+            const { userId } = request.cookies;
+    
+            if (userId) {
+               const meals = await useCase.listMeals(userId);
+    
+               reply.status(200).send(meals);
+            }
+
+        } catch (error) {
+            return reply.status(400).send({ error });
+        }
+    }
+
+    async listMealById(request: FastifyRequest, reply: FastifyReply) {
+        try {
+            const model = new PrismaService()
+            const repository = new MealsDatabaseRepository(model);
+            const useCase = new MealsUseCase(repository);
+
+            const idMealsSchema = z.object({
+                id: z.string().uuid()
+            });
+    
+            const { id } = idMealsSchema.parse(request.query);
+    
+            const { userId } = request.cookies;
+    
+            if (userId) {
+               const meal = await useCase.listMealById(id);
+    
+               reply.status(200).send(meal);
+            }
+
+        } catch (error) {
+            return reply.status(400).send({ error });
         }
     }
 }

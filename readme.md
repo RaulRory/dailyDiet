@@ -9,10 +9,10 @@
     - [x] Deve ser possível registrar uma refeição feita
     - [x] Deve ser possível editar uma refeição, todos os dados
     - [x] Deve ser possível apagar uma refeição
-    - [ ] Deve ser possível listar todas as refeições de um usuário
-    - [ ] Deve ser possível visualizar uma única refeição
+    - [x] Deve ser possível listar todas as refeições de um usuário
+    - [x] Deve ser possível visualizar uma única refeição
 
 
 # Regras de Négocio
     - [x] Toda refeição é relacionada ao usúario
-    - [ ] O usuário só pode visualizar, editar e apagar as refeições o qual ele criou
+    - [x] O usuário só pode visualizar, editar e apagar as refeições o qual ele criou
