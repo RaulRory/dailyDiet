@@ -79,4 +79,29 @@ export class MealsController {
             return reply.status(400).send({ error: "there was a failure in the process"});
         }
     }
+
+    async deleteMeals(request: FastifyRequest, reply: FastifyReply) {
+        try {
+            const model = new PrismaService()
+            const repository = new MealsDatabaseRepository(model);
+            const useCase = new MealsUseCase(repository);
+
+            const idMealsSchema = z.object({
+                id: z.string().uuid()
+            });
+    
+            const { id } = idMealsSchema.parse(request.query);
+    
+            const { userId } = request.cookies;
+    
+            if (userId) {
+               await useCase.deleteMeals(id);
+    
+               reply.status(204).send({ message: "Meal deleted"});
+            }
+
+        } catch (error) {
+            return reply.status(400).send({ error: "there was a failure in the process"});
+        }
+    }
 }

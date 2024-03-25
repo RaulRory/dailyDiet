@@ -17,4 +17,10 @@ export class MealsUseCase {
 
         return mealUpdated;
     }
+
+    async deleteMeals(id: string) {
+        await this.mealsRepository.deleteMeals(id);
+
+        return;
+    }
 }
