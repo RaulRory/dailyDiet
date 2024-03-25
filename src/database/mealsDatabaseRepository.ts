@@ -35,4 +35,14 @@ export class MealsDatabaseRepository implements MealsRepository {
 
         return meal;
     }
+
+    async deleteMeals(id: string): Promise<void> {
+        await this.model.meals.delete({
+            where: {
+                id: id
+            }
+        });
+
+        return;
+    }
 }
