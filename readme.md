@@ -7,7 +7,7 @@
 
 ## Refeições
     - [x] Deve ser possível registrar uma refeição feita
-    - [ ] Deve ser possível editar uma refeição, todos os dados
+    - [x] Deve ser possível editar uma refeição, todos os dados
     - [ ] Deve ser possível apagar uma refeição
     - [ ] Deve ser possível listar todas as refeições de um usuário
     - [ ] Deve ser possível visualizar uma única refeição

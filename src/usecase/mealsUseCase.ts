@@ -11,4 +11,10 @@ export class MealsUseCase {
 
         return newMeal;
     }
+
+    async editMeals(dataToUpdate: Meals, id: string) {
+        const mealUpdated = await this.mealsRepository.updateMeals(dataToUpdate, id);
+
+        return mealUpdated;
+    }
 }
