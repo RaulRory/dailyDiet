@@ -45,4 +45,14 @@ export class MealsDatabaseRepository implements MealsRepository {
 
         return;
     }
+
+    async listMeals(id: string): Promise<Meals[]> {
+        const meals = await this.model.meals.findMany({
+            where: {
+                usersId: id
+            }
+        });
+
+        return meals;
+    }
 }

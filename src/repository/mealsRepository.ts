@@ -14,4 +14,5 @@ export interface MealsRepository {
     createMeals(data: Meals): Promise<Meals>
     updateMeals(dataToUpdate: Meals, id: string): Promise<Meals>
     deleteMeals(id: string): Promise<void>
+    listMeals(id: string): Promise<Meals[]>
 }
