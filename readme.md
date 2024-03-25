@@ -1,18 +1,24 @@
-# Requisitos Funcionais
+# Daily Diet API
 
-## Usuarios
-    - [x] Deve ser possível criar um usuário
-    - [x] Deve ser possível identificar o usuário entre as requisições
-    - [x] Deve ser possível recuperar as métricas de um usuário
+## Execução
 
-## Refeições
-    - [x] Deve ser possível registrar uma refeição feita
-    - [x] Deve ser possível editar uma refeição, todos os dados
-    - [x] Deve ser possível apagar uma refeição
-    - [x] Deve ser possível listar todas as refeições de um usuário
-    - [x] Deve ser possível visualizar uma única refeição
+### Node
 
+**OBS: Para executar a aplicação é necessario ter uma versão >=20 do Node**
 
-# Regras de Négocio
-    - [x] Toda refeição é relacionada ao usúario
-    - [x] O usuário só pode visualizar, editar e apagar as refeições o qual ele criou
+1. No seu terminal execute o comando e insira as linhas
+```bash
+npm run start:dev
+```
+
+### Makefike
+
+1. No seu terminal execute o comando e insira as linhas
+```bash
+make init 
+```
+OU
+
+```bash
+make start 
+```
